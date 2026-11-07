@@ -8,6 +8,7 @@ void times_table(void)
 	int row;
 	int col;
 	int result;
+	int next_result;
 
 	row = 0;
 	while (row < 10)
@@ -16,10 +17,9 @@ void times_table(void)
 		while (col < 10)
 		{
 			result = row * col;
+
 			if (result < 10)
-			{
 				_putchar(result + '0');
-			}
 			else
 			{
 				_putchar((result / 10) + '0');
@@ -29,8 +29,14 @@ void times_table(void)
 			if (col < 9)
 			{
 				_putchar(',');
-				_putchar(' ');
-				if (result < 10)
+				next_result = row * (col + 1);
+
+				if (next_result < 10)
+				{
+					_putchar(' ');
+					_putchar(' ');
+				}
+				else
 					_putchar(' ');
 			}
 			col++;
