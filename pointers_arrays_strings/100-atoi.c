@@ -2,6 +2,35 @@
 #include "main.h"
 
 /**
+ * atoi_convert - Converts the digit sequence safely.
+ * @s: The digit sequence.
+ * @sign: The number sign.
+ *
+ * Return: The converted integer.
+ */
+static int atoi_convert(char *s, int sign)
+{
+	int result, digit, limit, multmin;
+
+	result = 0;
+	limit = (sign < 0) ? INT_MIN : -INT_MAX;
+	multmin = limit / 10;
+
+	while (*s >= '0' && *s <= '9')
+	{
+		digit = *s - '0';
+		if (result < multmin)
+			return ((sign < 0) ? INT_MIN : INT_MAX);
+		result *= 10;
+		if (result < limit + digit)
+			return ((sign < 0) ? INT_MIN : INT_MAX);
+		result -= digit;
+		s++;
+	}
+	return ((sign < 0) ? result : -result);
+}
+
+/**
  * _atoi - Converts a string to an integer.
  * @s: The string to convert.
  *
@@ -9,48 +38,16 @@
  */
 int _atoi(char *s)
 {
-	int i;
 	int sign;
-	int result;
-	int digit;
-	int limit;
-	int multmin;
 
-	i = 0;
 	sign = 1;
-	result = 0;
-
-	while (s[i] != '\0' && (s[i] < '0' || s[i] > '9'))
+	while (*s != '\0' && (*s < '0' || *s > '9'))
 	{
-		if (s[i] == '-')
+		if (*s == '-')
 			sign = -sign;
-		i++;
+		s++;
 	}
-
-	if (s[i] == '\0')
+	if (*s == '\0')
 		return (0);
-
-	limit = (sign < 0) ? INT_MIN : -INT_MAX;
-	multmin = limit / 10;
-
-	while (s[i] >= '0' && s[i] <= '9')
-	{
-		digit = s[i] - '0';
-
-		if (result < multmin)
-			return ((sign < 0) ? INT_MIN : INT_MAX);
-
-		result *= 10;
-
-		if (result < limit + digit)
-			return ((sign < 0) ? INT_MIN : INT_MAX);
-
-		result -= digit;
-		i++;
-	}
-
-	if (sign < 0)
-		return (result);
-
-	return (-result);
+	return (atoi_convert(s, sign));
 }
