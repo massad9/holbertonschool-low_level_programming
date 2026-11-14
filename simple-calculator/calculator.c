@@ -8,6 +8,7 @@
 int main(void)
 {
 	int choice;
+	int a, b;
 
 	while (1)
 	{
@@ -26,9 +27,17 @@ int main(void)
 				printf("Bye!\n");
 				break;
 			}
-			else if (choice >= 1 && choice <= 4)
+			else if (choice == 1)
 			{
-				/* Operations will be added in future tasks */
+				printf("A: ");
+				scanf("%d", &a);
+				printf("B: ");
+				scanf("%d", &b);
+				printf("Result: %d\n", a + b);
+			}
+			else if (choice >= 2 && choice <= 4)
+			{
+				/* Future operations */
 			}
 			else
 			{
