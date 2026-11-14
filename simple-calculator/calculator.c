@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 /**
- * main - Entry point for the simple calculator
+ * main - Entry point for the simple calculator program
  *
  * Return: Always 0 (Success)
  */
@@ -17,8 +17,7 @@ int main(void)
 		printf("2) Subtract\n");
 		printf("3) Multiply\n");
 		printf("4) Divide\n");
-		printf("0) Quit");
-		printf("Choice: ");
+		printf("0) QuitChoice: ");
 
 		if (scanf("%d", &choice) == 1)
 		{
@@ -43,9 +42,28 @@ int main(void)
 				scanf("%d", &b);
 				printf("Result: %d\n", a - b);
 			}
-			else if (choice >= 3 && choice <= 4)
+			else if (choice == 3)
 			{
-				/* Future operations */
+				printf("A: ");
+				scanf("%d", &a);
+				printf("B: ");
+				scanf("%d", &b);
+				printf("Result: %d\n", a * b);
+			}
+			else if (choice == 4)
+			{
+				printf("A: ");
+				scanf("%d", &a);
+				printf("B: ");
+				scanf("%d", &b);
+				if (b == 0)
+				{
+					printf("Error: division by zero\n");
+				}
+				else
+				{
+					printf("Result: %g\n", (double)a / b);
+				}
 			}
 			else
 			{
